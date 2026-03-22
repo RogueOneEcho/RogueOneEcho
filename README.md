@@ -30,3 +30,25 @@ Open source tools built with Rust and Docker.
 
 - **[how-to-setup-deluge-with-protonvpn-portforward](https://github.com/RogueOneEcho/how-to-setup-deluge-with-protonvpn-portforward)** - How to setup Deluge via Proton VPN with port forwarding
 - **[how-to-setup-plex-sonarr-radarr](https://github.com/RogueOneEcho/how-to-setup-plex-sonarr-radarr)** - How to set up Sonarr, Radarr, Lidarr, Readarr, Plex and Jellyfin
+
+### GPG
+
+All commits are signed with GPG. Two separate keys are used:
+
+- [`RogueOneEcho.asc`](RogueOneEcho.asc) signs commits made locally.
+- [`RogueTwoDelta.asc`](RogueTwoDelta.asc) signs commits and tags created by CI/CD. This key is stored as a GitHub Actions secret, separate from the primary key so it can be revoked independently if compromised.
+
+#### Verifying commits
+
+Import both keys:
+
+```bash
+curl -sL https://raw.githubusercontent.com/RogueOneEcho/RogueOneEcho/main/RogueOneEcho.asc | gpg --import
+curl -sL https://raw.githubusercontent.com/RogueOneEcho/RogueOneEcho/main/RogueTwoDelta.asc | gpg --import
+```
+
+Verify signatures in any repo:
+
+```bash
+git log --show-signature
+```
