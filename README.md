@@ -83,3 +83,21 @@ Encrypt the content of a file and print the output:
 ```bash
 gpg --armor --encrypt --recipient RogueOneEcho --output - YOUR_FILE.txt
 ```
+
+### age
+
+[age](https://github.com/FiloSottile/age) keys can be used to send an encrypted message that only RogueOneEcho can decrypt.
+
+- [`RogueOneEcho.age`](RogueOneEcho.age) is a public key for encryption.
+
+Encrypt a simple message:
+
+```bash
+echo "Your message" | age --armor --recipient age186xy858t55tjvpk09khzaptn2ld04p2tfzawnkhpk04e8ar853qst3hkft
+```
+
+Encrypt the content of a file and print the output:
+
+```bash
+age --armor --recipient age186xy858t55tjvpk09khzaptn2ld04p2tfzawnkhpk04e8ar853qst3hkft YOUR_FILE.txt
+```
