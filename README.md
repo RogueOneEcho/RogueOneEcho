@@ -38,17 +38,48 @@ All commits are signed with GPG. Two separate keys are used:
 - [`RogueOneEcho.asc`](RogueOneEcho.asc) signs commits made locally.
 - [`RogueTwoDelta.asc`](RogueTwoDelta.asc) signs commits and tags created by CI/CD. This key is stored as a GitHub Actions secret, separate from the primary key so it can be revoked independently if compromised.
 
-#### Verifying commits
+#### Using GPG
 
-Import both keys:
+##### Import the keys
+
+Download and import the `RogueOneEcho` key:
 
 ```bash
 curl -sL https://raw.githubusercontent.com/RogueOneEcho/RogueOneEcho/main/RogueOneEcho.asc | gpg --import
+```
+
+Download and import the `RogueTwoDelta` key:
+
+```bash
 curl -sL https://raw.githubusercontent.com/RogueOneEcho/RogueOneEcho/main/RogueTwoDelta.asc | gpg --import
 ```
 
-Verify signatures in any repo:
+##### Verify commits and tags
+
+Verify the signature of any commit:
 
 ```bash
-git log --show-signature
+git log --show-signature -1 <HASH>
+```
+
+Verify the signature of any tag:
+
+```bash
+git verify-tag <TAG>
+```
+
+##### Encrypt a message
+
+GPG keys can be used to send an encrypted message that only RogueOneEcho can decrypt.
+
+Encrypt a simple message:
+
+```bash
+echo "Your message" | gpg --armor --encrypt --recipient RogueOneEcho
+```
+
+Encrypt the content of a file and print the output:
+
+```bash
+gpg --armor --encrypt --recipient RogueOneEcho --output - YOUR_FILE.txt
 ```
